@@ -10,4 +10,6 @@ router.get("/all1", auth.verifyAuth, userController.getAll);
 
 router.get("/user/:username", userController.getUser);
 
+router.get("/user/id/:id", userController.getID);
+
 module.exports = router;

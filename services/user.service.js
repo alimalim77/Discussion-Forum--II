@@ -61,8 +61,32 @@ const getUser = async (data) => {
     };
   }
 };
+
+const getID = async (data) => {
+  try {
+    const resp = await Users.find({ _id: data });
+    if (resp.length === 0)
+      return {
+        code: 404,
+        message: "No discussions found with this id",
+        discussionId: data,
+      };
+    return {
+      code: 200,
+      data: resp,
+    };
+  } catch (error) {
+    return {
+      code: 500,
+      message: "Internal Server Error",
+      error,
+    };
+  }
+};
+
 module.exports = {
   newPost,
   allGet,
   getUser,
+  getID,
 };

@@ -16,8 +16,15 @@ const getUser = async (req, res) => {
   res.status(resp.code).send(resp);
 };
 
+const getID = async (req, res) => {
+  let id = req.params.id;
+  const resp = await UserService.getID(id);
+  res.status(resp.code).send(resp);
+};
+
 module.exports = {
   postNew,
   getAll,
   getUser,
+  getID,
 };
