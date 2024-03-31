@@ -2,21 +2,21 @@ const Users = require("../models/user.model.js");
 
 const newPost = async (data) => {
   try {
-    const resp = await Users.create(data);
+    const resp = await Users.created(data);
     return {
       code: 200,
       data: resp,
     };
-  } catch (err) {
-    if (err.code === 11000)
+  } catch (error) {
+    if (error.code === 11000)
       return {
         code: 404,
         message: "user already exists",
-        author: err.keyValue.author,
+        author: error.keyValue.author,
       };
     return {
       code: 500,
-      error: err,
+      error,
     };
   }
 };
@@ -31,15 +31,38 @@ const allGet = async () => {
       code: 200,
       data: resp,
     };
-  } catch (err) {
+  } catch (error) {
     return {
       code: 500,
-      error: err,
+      error,
     };
   }
 };
 
+const getUser = async (data) => {
+  try {
+    const resp = await Users.find({ author: data });
+    if (!(resp.length === 0))
+      return {
+        code: 200,
+        data: resp,
+      };
+    else {
+      return {
+        code: 404,
+        message: "No discussions found for this user",
+        data,
+      };
+    }
+  } catch (error) {
+    return {
+      code: 500,
+      error,
+    };
+  }
+};
 module.exports = {
   newPost,
   allGet,
+  getUser,
 };

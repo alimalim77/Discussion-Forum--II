@@ -8,4 +8,6 @@ router.post("/new", userValidator.validator, userController.postNew);
 
 router.get("/all1", auth.verifyAuth, userController.getAll);
 
+router.get("/user/:username", userController.getUser);
+
 module.exports = router;
