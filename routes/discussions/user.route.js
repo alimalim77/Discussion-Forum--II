@@ -12,4 +12,6 @@ router.get("/user/:username", userController.getUser);
 
 router.get("/user/id/:id", userController.getID);
 
+router.delete("/user/id/:id", auth.verifyAuthor, userController.deleteUser);
+
 module.exports = router;

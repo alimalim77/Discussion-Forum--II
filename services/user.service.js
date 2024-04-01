@@ -84,9 +84,25 @@ const getID = async (data) => {
   }
 };
 
+const deleteUser = async (data) => {
+  try {
+    await Users.deleteOne({ _id: data });
+    return {
+      code: 200,
+      message: "User deleted successfully",
+    };
+  } catch (error) {
+    return {
+      code: 500,
+      message: "Internal Server Error",
+    };
+  }
+};
+
 module.exports = {
   newPost,
   allGet,
   getUser,
   getID,
+  deleteUser,
 };

@@ -22,9 +22,16 @@ const getID = async (req, res) => {
   res.status(resp.code).send(resp);
 };
 
+const deleteUser = async (req, res) => {
+  const id = req.params.id;
+  const resp = await UserService.deleteUser(id);
+  res.status(resp.code).send({ message: resp.message });
+};
+
 module.exports = {
   postNew,
   getAll,
   getUser,
   getID,
+  deleteUser,
 };
