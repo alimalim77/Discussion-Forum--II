@@ -9,7 +9,6 @@ const schema = Joi.object({
 const validator = (req, res, next) => {
   const data = req.body;
   const result = schema.validate(data);
-  console.log(result);
   if (result.error) return res.status(422).send(result);
   next();
 };

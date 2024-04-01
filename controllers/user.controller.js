@@ -28,10 +28,19 @@ const deleteUser = async (req, res) => {
   res.status(resp.code).send({ message: resp.message });
 };
 
+const patchUser = async (req, res) => {
+  const id = req.params.id;
+  const author = req.body.author;
+  const resp = await UserService.patchUser(id, author);
+  if (resp.null === true) res.status(resp.code).send(resp.error);
+  res.status(200).send(resp);
+};
+
 module.exports = {
   postNew,
   getAll,
   getUser,
   getID,
   deleteUser,
+  patchUser,
 };

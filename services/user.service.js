@@ -2,7 +2,7 @@ const Users = require("../models/user.model.js");
 
 const newPost = async (data) => {
   try {
-    const resp = await Users.created(data);
+    const resp = await Users.create(data);
     return {
       code: 200,
       data: resp,
@@ -99,10 +99,24 @@ const deleteUser = async (data) => {
   }
 };
 
+const patchUser = async (id, author) => {
+  try {
+    const user = await Users.findByIdAndUpdate(
+      id,
+      { author: author },
+      { new: true }
+    );
+    return user;
+  } catch (error) {
+    return { null: true, error: error };
+  }
+};
+
 module.exports = {
   newPost,
   allGet,
   getUser,
   getID,
   deleteUser,
+  patchUser,
 };
