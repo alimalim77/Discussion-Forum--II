@@ -1,5 +1,18 @@
 const mongoose = require("mongoose");
 
+const commentSchema = new mongoose.Schema({
+  author: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  content: {
+    type: String,
+    required: true,
+    maxLength: 500,
+  },
+});
+
 const discussions = new mongoose.Schema(
   {
     title: {
@@ -14,7 +27,11 @@ const discussions = new mongoose.Schema(
     },
     content: {
       type: String,
-      defaultValue: "",
+      default: "",
+    },
+    comments: {
+      type: [commentSchema],
+      default: "",
     },
   },
   { timestamps: true }
