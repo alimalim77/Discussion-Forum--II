@@ -1,17 +1,20 @@
 const mongoose = require("mongoose");
 
-const commentSchema = new mongoose.Schema({
-  author: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  content: {
-    type: String,
-    required: true,
-    maxLength: 500,
-  },
-});
+const commentSchema = new mongoose.Schema(
+  {
+    author: {
+      type: String,
+      required: true,
+      immutable: true,
+    },
+    content: {
+      type: String,
+      required: true,
+      maxLength: 500,
+    },
+  }
+  //{ _id: false } // Exclude the id field from the schema
+);
 
 const discussions = new mongoose.Schema(
   {
@@ -23,7 +26,7 @@ const discussions = new mongoose.Schema(
     author: {
       type: String,
       required: true,
-      unique: true,
+      immutable: true,
     },
     content: {
       type: String,
@@ -31,7 +34,7 @@ const discussions = new mongoose.Schema(
     },
     comments: {
       type: [commentSchema],
-      default: "",
+      default: [],
     },
   },
   { timestamps: true }

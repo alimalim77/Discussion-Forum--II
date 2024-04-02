@@ -99,13 +99,9 @@ const deleteUser = async (data) => {
   }
 };
 
-const patchUser = async (id, author) => {
+const patchUser = async (id, body) => {
   try {
-    const user = await Users.findByIdAndUpdate(
-      id,
-      { author: author },
-      { new: true }
-    );
+    const user = await Users.findByIdAndUpdate(id, body, { new: true });
     return user;
   } catch (error) {
     return { null: true, error: error };

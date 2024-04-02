@@ -17,7 +17,7 @@ const verifyAuthor = (action) => {
       //console.log(resp);
       if (!resp)
         return res.status(404).send({ message: "Discussion not found" });
-      if (action === "delete" && resp.author !== author)
+      if (resp.author !== author)
         return res.status(403).send({ message: "Unauthorized Access" });
       next();
     } catch (error) {

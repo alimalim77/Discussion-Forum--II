@@ -31,7 +31,7 @@ const deleteUser = async (req, res) => {
 const patchUser = async (req, res) => {
   const id = req.params.id;
   const author = req.body.author;
-  const resp = await UserService.patchUser(id, author);
+  const resp = await UserService.patchUser(id, req.body);
   if (resp.null === true) res.status(resp.code).send(resp.error);
   res.status(200).send(resp);
 };
