@@ -19,4 +19,11 @@ const validator = (req, res, next) => {
   next();
 };
 
-module.exports = { validator };
+const validateComment = (req, res, next) => {
+  const data = req.body;
+  const result = commentSchema.validate(data);
+  if (result.error) return res.status(422).send(result);
+  next();
+};
+
+module.exports = { validator, validateComment };

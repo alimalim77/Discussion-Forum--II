@@ -36,6 +36,13 @@ const patchUser = async (req, res) => {
   res.status(200).send(resp);
 };
 
+const putComment = async (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+  const resp = await UserService.putComment(id, body);
+  res.status(resp.code).send(resp);
+};
+
 module.exports = {
   postNew,
   getAll,
@@ -43,4 +50,5 @@ module.exports = {
   getID,
   deleteUser,
   patchUser,
+  putComment,
 };

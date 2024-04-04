@@ -102,9 +102,20 @@ const deleteUser = async (data) => {
 const patchUser = async (id, body) => {
   try {
     const user = await Users.findByIdAndUpdate(id, body, { new: true });
-    return user;
+    return { code: 200, data: user };
   } catch (error) {
-    return { null: true, error: error };
+    return { code: 500, error: error };
+  }
+};
+
+const putComment = async (id, body) => {
+  try {
+    const user = await Users.findById(id);
+    user.comments.push(body);
+    await user.save();
+    return { code: 200, user: user };
+  } catch (error) {
+    return { code: 500, error: error.message };
   }
 };
 
@@ -115,4 +126,5 @@ module.exports = {
   getID,
   deleteUser,
   patchUser,
+  putComment,
 };
